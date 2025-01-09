@@ -58,7 +58,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Телефон</mat-label>
-        <input matInput formControlName="phone" />
+        <input matInput type="number" formControlName="phone" />
         <ng-container *ngIf="aboutForm.controls['phone'] as phone">
           <mat-error *ngIf="phone.touched && phone.hasError('required')">
             Телефон обов'язковий
@@ -86,7 +86,7 @@
     <form [formGroup]="educationForm" class="form">
       <div formArrayName="educationBlocks">
         <div *ngFor="let block of educationBlocks.controls; let i = index">
-          <div class="education" [formGroup]="getEducationBlock(i)">
+          <div class="block" [formGroup]="getEducationBlock(i)">
             <mat-form-field appearance="outline">
               <mat-label>Заклад освіти</mat-label>
               <input matInput formControlName="placeEd" />
@@ -107,7 +107,6 @@
                   {{ year }}
                 </mat-option>
               </mat-select>
-              <!-- <input matInput type="number" formControlName="yearsEd" /> -->
               <ng-container
                 *ngIf="educationForm.controls['yearsEd'] as yearsEd"
               >
@@ -127,21 +126,25 @@
             </button>
           </div>
         </div>
+
         <button mat-raised-button color="primary" (click)="addEducationBlock()">
           Додати блок +
         </button>
       </div>
 
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="!educationForm.valid"
-        matStepperNext
-        (click)="educationStep()"
-      >
-        Далі
-      </button>
-      <button mat-raised-button matStepperPrevious>Назад</button>
+      <div class="btn-container">
+        <button mat-raised-button matStepperPrevious>Назад</button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!educationForm.valid"
+          matStepperNext
+          (click)="educationStep()"
+        >
+          Далі
+        </button>
+      </div>
     </form>
   </mat-step>
 
@@ -157,10 +160,7 @@
           <div
             *ngFor="let block of higherEducationBlocks.controls; let i = index"
           >
-            <div
-              class="higherEducation"
-              [formGroup]="getHigherEducationBlock(i)"
-            >
+            <div class="block" [formGroup]="getHigherEducationBlock(i)">
               <mat-form-field appearance="outline">
                 <mat-label>Заклад освіти</mat-label>
                 <input matInput formControlName="institution" />
@@ -185,7 +185,6 @@
                     {{ year }}
                   </mat-option>
                 </mat-select>
-                <!-- <input matInput type="number" formControlName="years" /> -->
                 <ng-container
                   *ngIf="higherEducationForm.controls['years'] as years"
                 >
@@ -228,16 +227,19 @@
           </button>
         </div>
 
-        <button
-          mat-raised-button
-          color="primary"
-          [disabled]="!educationForm.valid"
-          matStepperNext
-          (click)="higherEducationStep()"
-        >
-          Далі
-        </button>
-        <button mat-raised-button matStepperPrevious>Назад</button>
+        <div class="btn-container">
+          <button mat-raised-button matStepperPrevious>Назад</button>
+
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!educationForm.valid"
+            matStepperNext
+            (click)="higherEducationStep()"
+          >
+            Далі
+          </button>
+        </div>
       </form>
     </mat-step>
   </ng-container>
@@ -249,7 +251,7 @@
     <form [formGroup]="workExperienceForm" class="form">
       <div formArrayName="workExperienceBlocks">
         <div *ngFor="let block of workExperienceBlocks.controls; let i = index">
-          <div class="workExperience" [formGroup]="getworkExperienceBlock(i)">
+          <div class="block" [formGroup]="getworkExperienceBlock(i)">
             <mat-form-field appearance="outline">
               <mat-label>Місце роботи</mat-label>
               <input matInput formControlName="company" />
@@ -283,7 +285,6 @@
                   {{ year }}
                 </mat-option>
               </mat-select>
-              <!-- <input matInput type="number" formControlName="years" /> -->
               <ng-container
                 *ngIf="workExperienceForm.controls['years'] as years"
               >
@@ -302,6 +303,7 @@
           </div>
         </div>
       </div>
+
       <button
         mat-raised-button
         color="primary"
@@ -309,16 +311,20 @@
       >
         Додати блок
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="!workExperienceForm.valid"
-        matStepperNext
-        (click)="workExperienceStep()"
-      >
-        Далі
-      </button>
-      <button mat-raised-button matStepperPrevious>Назад</button>
+
+      <div class="btn-container">
+        <button mat-raised-button matStepperPrevious>Назад</button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!workExperienceForm.valid"
+          matStepperNext
+          (click)="workExperienceStep()"
+        >
+          Далі
+        </button>
+      </div>
     </form>
   </mat-step>
 

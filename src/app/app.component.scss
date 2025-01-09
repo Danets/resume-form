@@ -3,5 +3,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  margin-top: 1rem;
+}
+
+.block,
+.btn-container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.btn-container {
+  margin-top: 0.5rem;
 }
