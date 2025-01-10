@@ -6,6 +6,7 @@ import {
   FormArray,
   FormControl,
 } from '@angular/forms';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-root',
@@ -89,7 +90,6 @@ export class AppComponent implements OnInit {
         'about',
         JSON.stringify(this.aboutForm.value)
       );
-      console.log(about);
     }
   }
 
@@ -198,5 +198,11 @@ export class AppComponent implements OnInit {
       );
     }
     await this.initResult();
+  }
+
+  onStepChange(event: StepperSelectionEvent) {
+    if (event.selectedIndex === 3 || event.selectedIndex === 4) {
+      this.workExperienceStep();
+    }
   }
 }

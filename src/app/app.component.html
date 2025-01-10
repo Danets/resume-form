@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">Форма резюме</mat-toolbar>
 
-<mat-stepper linear #stepper>
+<mat-stepper linear #stepper (selectionChange)="onStepChange($event)">
   <mat-step [stepControl]="aboutForm">
     <form [formGroup]="aboutForm" class="form">
       <ng-template matStepLabel>About</ng-template>
