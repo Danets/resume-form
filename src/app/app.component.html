@@ -84,14 +84,16 @@
     >
 
     <form [formGroup]="educationForm" class="form">
-      <div formArrayName="educationBlocks">
-        <div *ngFor="let block of educationBlocks.controls; let i = index">
+      <ng-container formArrayName="educationBlocks">
+        <ng-container
+          *ngFor="let block of educationBlocks.controls; let i = index"
+        >
           <div class="block" [formGroup]="getEducationBlock(i)">
             <mat-form-field appearance="outline">
               <mat-label>Заклад освіти</mat-label>
               <input matInput formControlName="placeEd" />
               <ng-container
-                *ngIf="educationForm.controls['placeEd'] as placeEd"
+                *ngIf="educationBlocks.at(i).get('placeEd') as placeEd"
               >
                 <mat-error
                   *ngIf="placeEd.touched && placeEd.hasError('required')"
@@ -108,7 +110,7 @@
                 </mat-option>
               </mat-select>
               <ng-container
-                *ngIf="educationForm.controls['yearsEd'] as yearsEd"
+                *ngIf="educationBlocks.at(i).get('yearsEd') as yearsEd"
               >
                 <mat-error
                   *ngIf="yearsEd.touched && yearsEd.hasError('required')"
@@ -125,12 +127,12 @@
               Видалити
             </button>
           </div>
-        </div>
+        </ng-container>
 
         <button mat-raised-button color="primary" (click)="addEducationBlock()">
           Додати блок +
         </button>
-      </div>
+      </ng-container>
 
       <div class="btn-container">
         <button mat-raised-button matStepperPrevious>Назад</button>
@@ -156,8 +158,8 @@
       label="Fill out your higher Education"
     >
       <form [formGroup]="higherEducationForm" class="form">
-        <div formArrayName="higherEducationBlocks">
-          <div
+        <ng-container formArrayName="higherEducationBlocks">
+          <ng-container
             *ngFor="let block of higherEducationBlocks.controls; let i = index"
           >
             <div class="block" [formGroup]="getHigherEducationBlock(i)">
@@ -166,7 +168,9 @@
                 <input matInput formControlName="institution" />
                 <ng-container
                   *ngIf="
-                    higherEducationForm.controls['institution'] as institution
+                    higherEducationBlocks
+                      .at(i)
+                      .get('institution') as institution
                   "
                 >
                   <mat-error
@@ -186,7 +190,7 @@
                   </mat-option>
                 </mat-select>
                 <ng-container
-                  *ngIf="higherEducationForm.controls['years'] as years"
+                  *ngIf="higherEducationBlocks.at(i).get('years') as years"
                 >
                   <mat-error
                     *ngIf="years.touched && years.hasError('required')"
@@ -199,7 +203,7 @@
                 <mat-label>Ступінь</mat-label>
                 <input matInput formControlName="degree" />
                 <ng-container
-                  *ngIf="higherEducationForm.controls['degree'] as degree"
+                  *ngIf="higherEducationBlocks.at(i).get('degree') as degree"
                 >
                   <mat-error
                     *ngIf="degree.touched && degree.hasError('required')"
@@ -216,7 +220,7 @@
                 Видалити
               </button>
             </div>
-          </div>
+          </ng-container>
 
           <button
             mat-raised-button
@@ -225,7 +229,7 @@
           >
             Додати блок
           </button>
-        </div>
+        </ng-container>
 
         <div class="btn-container">
           <button mat-raised-button matStepperPrevious>Назад</button>
@@ -249,14 +253,16 @@
     label="Fill out your work Experience"
   >
     <form [formGroup]="workExperienceForm" class="form">
-      <div formArrayName="workExperienceBlocks">
-        <div *ngFor="let block of workExperienceBlocks.controls; let i = index">
+      <ng-container formArrayName="workExperienceBlocks">
+        <ng-container
+          *ngFor="let block of workExperienceBlocks.controls; let i = index"
+        >
           <div class="block" [formGroup]="getworkExperienceBlock(i)">
             <mat-form-field appearance="outline">
               <mat-label>Місце роботи</mat-label>
               <input matInput formControlName="company" />
               <ng-container
-                *ngIf="workExperienceForm.controls['company'] as company"
+                *ngIf="workExperienceBlocks.at(i).get('company') as company"
               >
                 <mat-error
                   *ngIf="company.touched && company.hasError('required')"
@@ -269,7 +275,7 @@
               <mat-label>Посада</mat-label>
               <input matInput formControlName="position" />
               <ng-container
-                *ngIf="workExperienceForm.controls['position'] as position"
+                *ngIf="workExperienceBlocks.at(i).get('position') as position"
               >
                 <mat-error
                   *ngIf="position.touched && position.hasError('required')"
@@ -286,7 +292,7 @@
                 </mat-option>
               </mat-select>
               <ng-container
-                *ngIf="workExperienceForm.controls['years'] as years"
+                *ngIf="workExperienceBlocks.at(i).get('years') as years"
               >
                 <mat-error *ngIf="years.touched && years.hasError('required')">
                   Інпут обов'язковий
@@ -301,8 +307,8 @@
               Видалити
             </button>
           </div>
-        </div>
-      </div>
+        </ng-container>
+      </ng-container>
 
       <button
         mat-raised-button
