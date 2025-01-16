@@ -11,11 +11,25 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { AppComponent } from './app.component';
+import { AboutComponent } from './about/about.component';
+import { EducationComponent } from './education/education.component';
+import { HigherEducationComponent } from './higher-education/higher-education.component';
+import { WorkExperienceComponent } from './work-experience/work-experience.component';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    AboutComponent,
+    EducationComponent,
+    HigherEducationComponent,
+    WorkExperienceComponent,
+    ResultComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -28,6 +42,8 @@ import { AppComponent } from './app.component';
     MatCheckboxModule,
     MatButtonModule,
     MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

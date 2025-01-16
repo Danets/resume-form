@@ -1,0 +1,70 @@
+<form [formGroup]="workExperienceForm" class="form">
+  <ng-container formArrayName="workExperienceBlocks">
+    <ng-container
+      *ngFor="let block of workExperienceBlocks.controls; let i = index"
+    >
+      <div class="block" [formGroup]="getworkExperienceBlock(i)">
+        <mat-form-field appearance="outline">
+          <mat-label>Місце роботи</mat-label>
+          <input matInput formControlName="company" />
+        </mat-form-field>
+        <ng-container
+          *ngIf="workExperienceBlocks.at(i).get('company') as company"
+        >
+          <mat-error *ngIf="company.touched && company.hasError('required')">
+            Інпут обов'язковий
+          </mat-error>
+        </ng-container>
+        <mat-form-field appearance="outline">
+          <mat-label>Посада</mat-label>
+          <input matInput formControlName="position" />
+        </mat-form-field>
+        <ng-container
+          *ngIf="workExperienceBlocks.at(i).get('position') as position"
+        >
+          <mat-error *ngIf="position.touched && position.hasError('required')">
+            Інпут обов'язковий
+          </mat-error>
+        </ng-container>
+        <mat-form-field appearance="outline">
+          <mat-label>Роки роботи</mat-label>
+          <mat-select formControlName="years">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{ year }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="workExperienceBlocks.at(i).get('years') as years">
+          <mat-error *ngIf="years.touched && years.hasError('required')">
+            Інпут обов'язковий
+          </mat-error>
+        </ng-container>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="removeWorkExperienceBlock(i)"
+        >
+          Видалити
+        </button>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <button mat-raised-button color="primary" (click)="addWorkExperienceBlock()">
+    Додати блок
+  </button>
+
+  <div class="btn-container">
+    <button mat-raised-button matStepperPrevious>Назад</button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!workExperienceForm.valid"
+      matStepperNext
+      (click)="workExperienceStep()"
+    >
+      Далі
+    </button>
+  </div>
+</form>

@@ -1,0 +1,37 @@
+<div>
+  <h2>Резюме</h2>
+  <hr />
+  <div>
+    <h3>Про мене:</h3>
+    <p>Ім'я: {{ about?.firstName }}</p>
+    <p>Прізвище: {{ about?.lastName }}</p>
+    <p>Email: {{ about?.email }}</p>
+    <p>Телефон: {{ about?.phone }}</p>
+  </div>
+  <hr />
+  <div>
+    <h3>Освіта:</h3>
+    <div *ngFor="let edu of education?.educationBlocks">
+      <p>Заклад: {{ edu.placeEd }}</p>
+      <p>Роки: {{ edu.yearsEd }}</p>
+    </div>
+  </div>
+  <hr />
+  <div>
+    <h3>Вища освіта:</h3>
+    <div *ngFor="let edu of higherEducation?.higherEducationBlocks">
+      <p>Заклад: {{ edu.institution }}</p>
+      <p>Роки: {{ edu.years }}</p>
+      <p>Ступінь: {{ edu.degree }}</p>
+    </div>
+  </div>
+  <hr />
+  <div>
+    <h3>Досвід роботи:</h3>
+    <div *ngFor="let work of workExperience?.workExperienceBlocks">
+      <p>Місце роботи: {{ work.company }}</p>
+      <p>Посада: {{ work.position }}</p>
+      <p>Роки: {{ work.years }}</p>
+    </div>
+  </div>
+</div>

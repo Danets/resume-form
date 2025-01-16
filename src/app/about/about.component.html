@@ -1,0 +1,74 @@
+<form [formGroup]="aboutForm" class="form">
+  <ng-template matStepLabel>About</ng-template>
+  <mat-form-field appearance="outline">
+    <mat-label>Ім'я</mat-label>
+    <input matInput formControlName="firstName" />
+  </mat-form-field>
+  <ng-container *ngIf="aboutForm.controls['firstName'] as firstName">
+    <mat-error *ngIf="firstName.touched && firstName.hasError('required')">
+      Ім'я обов'язкове
+    </mat-error>
+  </ng-container>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Прізвище</mat-label>
+    <input matInput formControlName="lastName" />
+  </mat-form-field>
+  <ng-container *ngIf="aboutForm.controls['lastName'] as lastName">
+    <mat-error *ngIf="lastName.touched && lastName.hasError('required')">
+      Прізвище обов'язкове
+    </mat-error>
+  </ng-container>
+
+  <mat-form-field appearance="outline" class="date-picker">
+    <mat-label>Дата народження</mat-label>
+    <input
+      matInput
+      [matDatepicker]="dateOfBirth"
+      formControlName="dateOfBirth"
+    />
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="dateOfBirth"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #dateOfBirth></mat-datepicker>
+  </mat-form-field>
+  <ng-container *ngIf="aboutForm.controls['dateOfBirth'] as dateOfBirth">
+    <mat-error *ngIf="dateOfBirth.touched && dateOfBirth.hasError('required')">
+      Дата народження обов'язкова
+    </mat-error>
+  </ng-container>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+  </mat-form-field>
+  <ng-container *ngIf="aboutForm.controls['email'] as email">
+    <mat-error *ngIf="email.touched && email.hasError('required')">
+      Email обов'язковий
+    </mat-error>
+    <mat-error *ngIf="email.touched && email.hasError('email')">
+      Не правильний формат Email
+    </mat-error>
+  </ng-container>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Телефон</mat-label>
+    <input matInput type="number" formControlName="phone" />
+  </mat-form-field>
+  <ng-container *ngIf="aboutForm.controls['phone'] as phone">
+    <mat-error *ngIf="phone.touched && phone.hasError('required')">
+      Телефон обов'язковий
+    </mat-error>
+  </ng-container>
+
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!aboutForm.valid"
+    matStepperNext
+    (click)="aboutStep()"
+  >
+    Далі
+  </button>
+</form>

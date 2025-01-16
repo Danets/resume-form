@@ -1,0 +1,76 @@
+<form [formGroup]="higherEducationForm" class="form">
+  <ng-container formArrayName="higherEducationBlocks">
+    <ng-container
+      *ngFor="let block of higherEducationBlocks.controls; let i = index"
+    >
+      <div class="block" [formGroup]="getHigherEducationBlock(i)">
+        <mat-form-field appearance="outline">
+          <mat-label>Заклад освіти</mat-label>
+          <input matInput formControlName="institution" />
+        </mat-form-field>
+        <ng-container
+          *ngIf="higherEducationBlocks.at(i).get('institution') as institution"
+        >
+          <mat-error
+            *ngIf="institution.touched && institution.hasError('required')"
+          >
+            Інпут обов'язковий
+          </mat-error>
+        </ng-container>
+        <mat-form-field appearance="outline">
+          <mat-label>Роки навчання</mat-label>
+          <mat-select formControlName="years">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{ year }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="higherEducationBlocks.at(i).get('years') as years">
+          <mat-error *ngIf="years.touched && years.hasError('required')">
+            Інпут обов'язковий
+          </mat-error>
+        </ng-container>
+        <mat-form-field appearance="outline">
+          <mat-label>Ступінь</mat-label>
+          <input matInput formControlName="degree" />
+        </mat-form-field>
+        <ng-container
+          *ngIf="higherEducationBlocks.at(i).get('degree') as degree"
+        >
+          <mat-error *ngIf="degree.touched && degree.hasError('required')">
+            Інпут обов'язковий
+          </mat-error>
+        </ng-container>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="removeHigherEducationBlock(i)"
+        >
+          Видалити
+        </button>
+      </div>
+    </ng-container>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addHigherEducationBlock()"
+    >
+      Додати блок
+    </button>
+  </ng-container>
+
+  <div class="btn-container">
+    <button mat-raised-button matStepperPrevious>Назад</button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!higherEducationForm.valid"
+      matStepperNext
+      (click)="higherEducationStep()"
+    >
+      Далі
+    </button>
+  </div>
+</form>

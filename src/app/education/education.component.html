@@ -1,0 +1,59 @@
+<mat-checkbox class="checkbox" [formControl]="checkboxControl"
+  >Маю вищу освіту</mat-checkbox
+>
+
+<form [formGroup]="educationForm" class="form">
+  <ng-container formArrayName="educationBlocks">
+    <ng-container *ngFor="let block of educationBlocks.controls; let i = index">
+      <div class="block" [formGroup]="getEducationBlock(i)">
+        <mat-form-field appearance="outline">
+          <mat-label>Заклад освіти</mat-label>
+          <input matInput formControlName="placeEd" />
+        </mat-form-field>
+        <ng-container *ngIf="educationBlocks.at(i).get('placeEd') as placeEd">
+          <mat-error *ngIf="placeEd.touched && placeEd.hasError('required')">
+            Інпут обов'язковий
+          </mat-error>
+        </ng-container>
+        <mat-form-field appearance="outline">
+          <mat-label>Роки навчання</mat-label>
+          <mat-select formControlName="yearsEd">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{ year }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="educationBlocks.at(i).get('yearsEd') as yearsEd">
+          <mat-error *ngIf="yearsEd.touched && yearsEd.hasError('required')">
+            Інпут обов'язковий
+          </mat-error>
+        </ng-container>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="removeEducationBlock(i)"
+        >
+          Видалити
+        </button>
+      </div>
+    </ng-container>
+
+    <button mat-raised-button color="primary" (click)="addEducationBlock()">
+      Додати блок +
+    </button>
+  </ng-container>
+
+  <div class="btn-container">
+    <button mat-raised-button matStepperPrevious>Назад</button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!educationForm.valid"
+      matStepperNext
+      (click)="educationStep()"
+    >
+      Далі
+    </button>
+  </div>
+</form>
