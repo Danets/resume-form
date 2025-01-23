@@ -1,6 +1,14 @@
-<mat-toolbar color="primary">Форма резюме</mat-toolbar>
+<mat-toolbar color="primary" (click)="isLinear = !isLinear"
+  >Форма резюме</mat-toolbar
+>
 
-<mat-stepper linear #stepper (selectionChange)="onStepChange($event)">
+<h1>{{ isLinear ? "Liner" : "NOPE" }}</h1>
+
+<mat-stepper
+  [linear]="isLinear"
+  #stepper
+  (selectionChange)="onStepChange($event)"
+>
   <mat-step [stepControl]="aboutForm" label="Fill out info about you">
     <app-about></app-about>
   </mat-step>
@@ -9,9 +17,7 @@
     <app-education></app-education>
   </mat-step>
 
-  <ng-container
-    *ngIf="isHigherEducationExist$ | async as isHigherEducationExist"
-  >
+  <ng-container *ngIf="isHigherEducationExist">
     <mat-step
       [stepControl]="higherEducationForm"
       label="Fill out your higher Education"
