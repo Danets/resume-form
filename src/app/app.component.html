@@ -1,14 +1,11 @@
-<mat-toolbar color="primary" (click)="isLinear = !isLinear"
-  >Форма резюме</mat-toolbar
->
+<mat-toolbar color="primary">Форма резюме</mat-toolbar>
 
-<h1>{{ isLinear ? "Liner" : "NOPE" }}</h1>
+<div class="progress">
+  <h1>{{ step }}% Заповнення Форми</h1>
+  <mat-progress-bar mode="determinate" [value]="step"></mat-progress-bar>
+</div>
 
-<mat-stepper
-  [linear]="isLinear"
-  #stepper
-  (selectionChange)="onStepChange($event)"
->
+<mat-stepper [linear]="true" #stepper (selectionChange)="onStepChange($event)">
   <mat-step [stepControl]="aboutForm" label="Fill out info about you">
     <app-about></app-about>
   </mat-step>

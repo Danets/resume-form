@@ -22,17 +22,15 @@ import { Subject } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  private fb = inject(FormBuilder);
   private destroyed$ = new Subject<void>();
 
   aboutForm!: FormGroup;
   educationForm!: FormGroup;
   higherEducationForm!: FormGroup;
   workExperienceForm!: FormGroup;
-
   result!: any;
 
-  isLinear = true;
+  step = 0;
 
   @ViewChild(AboutComponent) aboutComponent!: AboutComponent;
 
@@ -50,6 +48,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
+    this.stepper.selectionChange
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((event: StepperSelectionEvent) => {
+        this.updateProgress(event.selectedIndex);
+      });
+
     this.educationComponent.checkboxControl.valueChanges
       .pipe(takeUntil(this.destroyed$))
       .subscribe((isHigherEducationExist) => {
@@ -104,6 +108,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.stepper.selectedIndex = event.previouslySelectedIndex;
     }, 0);
+  }
+
+  private updateProgress(currentStepIndex: number) {
+    const totalSteps = this.stepper._steps.length;
+    this.step = ((currentStepIndex + 1) / totalSteps) * 100;
   }
 
   onStepChange(event: StepperSelectionEvent) {
