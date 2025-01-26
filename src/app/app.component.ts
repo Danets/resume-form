@@ -6,15 +6,18 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { EducationComponent } from './education/education.component';
-import { WorkExperienceComponent } from './work-experience/work-experience.component';
+import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { AboutComponent } from './about/about.component';
-import { HigherEducationComponent } from './higher-education/higher-education.component';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+
+import { AboutComponent } from './about/about.component';
+import { EducationComponent } from './education/education.component';
+import { HigherEducationComponent } from './higher-education/higher-education.component';
+import { WorkExperienceComponent } from './work-experience/work-experience.component';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +26,7 @@ import { Subject } from 'rxjs';
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   private destroyed$ = new Subject<void>();
+  private snackBar = inject(MatSnackBar);
 
   aboutForm!: FormGroup;
   educationForm!: FormGroup;
@@ -95,6 +99,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         ) {
           this.workExperienceComponent.workExperienceStep();
           this.stepper.next();
+          this.snackBar.open('Form submitted successfully', 'Close', {
+            duration: 5000,
+          });
         }
       });
   }

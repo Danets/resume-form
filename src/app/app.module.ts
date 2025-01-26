@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
@@ -46,6 +47,7 @@ import { ResultComponent } from './result/result.component';
     MatNativeDateModule,
     MatDatepickerModule,
     MatProgressBarModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
